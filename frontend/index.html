@@ -3,80 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Inventario y Pedidos</title>
-    <!-- Si tienes un archivo CSS, puedes mantener el enlace -->
+    <title>NABI CAKES - Gestión de Inventario y Pedidos</title>
+    <!-- Google Fonts para darle una tipografía pastelera elegante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Gestión de Inventario y Pedidos</h1>
+        <!-- Encabezado con Logo y Marca NABI CAKES -->
+        <header class="app-header">
+            <div class="logo-wrapper">
+                <!-- Puedes cambiar el src="logo.png" por la ruta de tu imagen de logo -->
+                <img src="logo.png" alt="Logo NABI CAKES" class="app-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081949.png';">
+            </div>
+            <div class="header-titles">
+                <h1>NABI CAKES</h1>
+                <p>Sistema de Gestión de Inventario y Pedidos</p>
+            </div>
         </header>
 
         <!-- Tarjetas de Resumen (KPIs) -->
         <section class="kpi-container">
-            <div class="card">
-                <h3>Total de Insumos</h3>
-                <p id="total-items">0</p>
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-info">
+                    <h4>Total de Insumos</h4>
+                    <span id="total-items">0</span>
+                </div>
             </div>
-            <div class="card">
-                <h3>Stock Bajo</h3>
-                <p id="low-stock">0</p>
+            <div class="stat-card alert-card">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-info">
+                    <h4>Stock Bajo</h4>
+                    <span id="low-stock">0</span>
+                </div>
             </div>
         </section>
 
         <!-- Sección de Inventario -->
-        <section class="section">
-            <h2>Inventario de Insumos</h2>
+        <section class="card section">
+            <h2>📦 Inventario de Insumos</h2>
             
             <form id="inventory-form" class="form-grid">
-                <input type="text" id="name" placeholder="Nombre del insumo" required>
-                <input type="number" id="quantity" placeholder="Cantidad" required>
-                <input type="text" id="unit" placeholder="Unidad (Ej. Kg, L)" required>
-                <input type="number" step="0.01" id="cost" placeholder="Costo Unitario ($)" required>
-                <button type="submit" class="btn-primary">Guardar Insumo</button>
+                <div class="form-group">
+                    <label for="name">Nombre del Insumo</label>
+                    <input type="text" id="name" placeholder="Ej. Harina Leudante" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Cantidad</label>
+                    <input type="number" id="quantity" placeholder="Ej. 10" required>
+                </div>
+                <div class="form-group">
+                    <label for="unit">Unidad</label>
+                    <input type="text" id="unit" placeholder="Ej. Kg, L, Unidades" required>
+                </div>
+                <div class="form-group">
+                    <label for="cost">Costo Unitario ($)</label>
+                    <input type="number" step="0.01" id="cost" placeholder="Ej. 2.50" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Insumo</button>
             </form>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Insumo</th>
-                        <th>Cantidad</th>
-                        <th>Costo</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="inventory-list">
-                    <!-- Se llena automáticamente con JavaScript -->
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Insumo</th>
+                            <th>Cantidad</th>
+                            <th>Costo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-list">
+                        <!-- Se llena automáticamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <!-- Sección de Pedidos -->
-        <section class="section">
-            <h2>Gestión de Pedidos</h2>
+        <section class="card section">
+            <h2>📝 Gestión de Pedidos</h2>
             
             <form id="order-form" class="form-grid">
-                <input type="text" id="client-name" placeholder="Cliente / Pastelería" required>
-                <input type="text" id="order-item" placeholder="Insumo o Producto" required>
-                <input type="number" id="order-quantity" placeholder="Cantidad" required>
-                <button type="submit" class="btn-primary">Crear Pedido</button>
+                <div class="form-group">
+                    <label for="client-name">Cliente / Pastelería</label>
+                    <input type="text" id="client-name" placeholder="Ej. Maria Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="order-item">Insumo o Producto</label>
+                    <input type="text" id="order-item" placeholder="Ej. Torta de Chocolate" required>
+                </div>
+                <div class="form-group">
+                    <label for="order-quantity">Cantidad</label>
+                    <input type="number" id="order-quantity" placeholder="Ej. 2" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Crear Pedido</button>
             </form>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Insumo</th>
-                        <th>Cantidad</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody id="orders-list">
-                    <!-- Se llena automáticamente con JavaScript -->
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Insumo / Producto</th>
+                            <th>Cantidad</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-list">
+                        <!-- Se llena automáticamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </section>
     </div>
 
