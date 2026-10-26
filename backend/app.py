@@ -1,14 +1,23 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import sqlite3
 import os
 
-app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Configuración de la carpeta frontend (busca 'frontend' en la raíz o un nivel arriba)
+if os.path.exists(os.path.join(BASE_DIR, 'frontend')):
+    FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
+else:
+    FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, '..', 'frontend'))
+
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path='')
 CORS(app)  # Habilita CORS para conectar el Frontend
 
 # Función para conectar a la base de datos SQLite
 def get_db_connection():
-    conn = sqlite3.connect('database.db')
+    db_path = os.path.join(BASE_DIR, 'database.db')
+    conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row  # Permite acceder a las columnas por nombre
     return conn
 
@@ -45,6 +54,21 @@ def init_db():
 
 # Ejecutar la creación de la base de datos al arrancar
 init_db()
+
+
+# ==========================
+# 🌐 RUTAS DE FRONTEND (WEB)
+# ==========================
+
+@app.route('/')
+def index():
+    """Sirve la página principal del frontend."""
+    return send_from_directory(FRONTEND_DIR, 'index.html')
+
+@app.route('/<path:filename>')
+def serve_static(filename):
+    """Sirve los archivos estáticos (CSS, JS, imágenes)."""
+    return send_from_directory(FRONTEND_DIR, filename)
 
 
 # ==========================
