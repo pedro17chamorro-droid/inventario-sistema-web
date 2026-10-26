@@ -1,4 +1,5 @@
-const API_BASE = 'http://127.0.0.1:5000/api';
+// Usar ruta relativa permite que funcione tanto en local como en Render automáticamente
+const API_BASE = '/api';
 
 // Variable para controlar si estamos editando un insumo
 let editingItemId = null;
