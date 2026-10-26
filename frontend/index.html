@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Control de Inventario & Costos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Encabezado / Header -->
+    <header class="navbar">
+        <div class="logo">
+            📦 <span>ControlInv</span>
+        </div>
+        <p class="subtitle">Panel de Inventarios y Gestión de Pedidos</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- Tarjetas de Resumen (KPIs) -->
+        <section class="stats-grid">
+            <div class="card stat-card">
+                <h3>Total Insumos</h3>
+                <p class="number" id="total-items">12</p>
+            </div>
+            <div class="card stat-card warning">
+                <h3>Bajo Stock</h3>
+                <p class="number" id="low-stock">2</p>
+            </div>
+            <div class="card stat-card">
+                <h3>Pedidos Activos</h3>
+                <p class="number" id="active-orders">5</p>
+            </div>
+        </section>
+
+        <!-- Formulario y Tabla en Grid -->
+        <div class="content-grid">
+            
+            <!-- Formulario de Registro -->
+            <section class="card form-section">
+                <h2>Registrar Nuevo Insumo</h2>
+                <form id="inventory-form">
+                    <div class="form-group">
+                        <label for="name">Nombre del Insumo / Producto</label>
+                        <input type="text" id="name" placeholder="Ej. Harina de trigo, Envases" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantity">Cantidad</label>
+                            <input type="number" id="quantity" min="0" placeholder="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="unit">Unidad</label>
+                            <select id="unit">
+                                <option value="Kg">Kg</option>
+                                <option value="Litros">Litros</option>
+                                <option value="Unidades">Unidades</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cost">Costo Unitario ($)</label>
+                        <input type="number" step="0.01" id="cost" placeholder="0.00" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Guardar En Inventario</button>
+                </form>
+            </section>
+
+            <!-- Tabla de Inventario -->
+            <section class="card table-section">
+                <h2>Lista de Inventario</h2>
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Insumo</th>
+                            <th>Stock</th>
+                            <th>Costo Unit.</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-list">
+                        <tr>
+                            <td>Harina de Trigo</td>
+                            <td>25 Kg</td>
+                            <td>$1.20</td>
+                            <td><span class="badge ok">Suficiente</span></td>
+                            <td><button class="btn-danger">Borrar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Mantequilla</td>
+                            <td>2 Kg</td>
+                            <td>$4.50</td>
+                            <td><span class="badge alert">Stock Bajo</span></td>
+                            <td><button class="btn-danger">Borrar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+
+    </main>
+
+<script src="app.js"></script>
+</body>
+</html>
