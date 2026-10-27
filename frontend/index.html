@@ -16,7 +16,7 @@
         <header class="app-header">
             <div class="logo-wrapper">
                 <!-- Apunta correctamente a logo.jpg -->
-                <img src="logo.jpg" alt="Logo NABI CAKES" class="app-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081949.png';">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo NABI CAKES" class="app-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081949.png';">
             </div>
             <div class="header-titles">
                 <h1>NABI CAKES</h1>
